@@ -128,8 +128,10 @@ Exibe a chave privada e o ip público da instância após a criação.
  # Restringir o Acesso SSH
   - Como o security group está permitindo o acesso do SSH de qualquer lugar, acaba se tornando um pouco arriscado, logo, precisamos restringir esse acesso.
      - Se substituirmos a regra de entrada pela seguinte:
-          `ingress {
-              description      = "Allow SSH from trusted IPs"
+       
+              ´ ingress {
+       
+               description      = "Allow SSH from trusted IPs"
        
               from_port        = 22
        
@@ -142,7 +144,9 @@ Exibe a chave privada e o ip público da instância após a criação.
             }`
 # Usar um Security Group específico para o SSH
  - Devemos criar um grupo separado para o SSH e associar o mesmo a instância;
-    - resource "aws_security_group" "ssh_sg" {
+
+  ```terraform 
+   resource "aws_security_group" "ssh_sg" {
         name        = "${var.projeto}-${var.candidato}-ssh-sg"
         description = "Permitir SSH apenas de IPs confiáveis"
         vpc_id      = aws_vpc.main_vpc.id
@@ -159,4 +163,7 @@ Exibe a chave privada e o ip público da instância após a criação.
     Name = "${var.projeto}-${var.candidato}-ssh-sg"
   }
 }
+
+
+
 - Por fim, devemos adicionar o Security Group á instância: "security_groups = [aws_security_group.main_sg.name, aws_security_group.ssh_sg.name] "
