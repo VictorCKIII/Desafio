@@ -204,3 +204,13 @@ Exibe a chave privada e o ip público da instância após a criação.
 - systemctl start nginx - Inicia o serviço do Nginx;
 - systemctl enable nginx - Configura o Nginx para iniciar automaticamente no boot
 
+
+## Como Acessar
+ - No terminal digite:
+
+          terraform initi
+          terraform aplly
+- Após a criação da instância, acesse o Nginx antes já configurado em seu navegador usando o Ip público do qual você escolheu para sua instância;
+- Por fim, se conecte a instância via SSH
+
+             ssh -i chave_privada.pem admin@<Ip escolhido> 
