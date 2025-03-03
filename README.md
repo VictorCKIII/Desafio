@@ -129,7 +129,7 @@ Exibe a chave privada e o ip público da instância após a criação.
   - Como o security group está permitindo o acesso do SSH de qualquer lugar, acaba se tornando um pouco arriscado, logo, precisamos restringir esse acesso.
      - Se substituirmos a regra de entrada pela seguinte:
        
-              ´´´ ingress {
+               ingress {
        
                description      = "Allow SSH from trusted IPs"
        
@@ -141,12 +141,12 @@ Exibe a chave privada e o ip público da instância após a criação.
        
               cidr_blocks      = ["IP Público/32"]
        
-            }´´´
+            }
        
 # Usar um Security Group específico para o SSH
  - Devemos criar um grupo separado para o SSH e associar o mesmo a instância;
 
-         ´´´ resource "aws_security_group" "ssh_sg" {
+          resource "aws_security_group" "ssh_sg" {
              name        = "${var.projeto}-${var.candidato}-ssh-sg"
              description = "Permitir SSH apenas de IPs confiáveis"
              vpc_id      = aws_vpc.main_vpc.id
@@ -166,8 +166,40 @@ Exibe a chave privada e o ip público da instância após a criação.
 
 - Por fim, devemos adiconar o Security Group a instância:
 
-        ´´´ security_groups = [aws_security_group.main_sg.name, aws_security_group.ssh_sg.name] ```
+         security_groups = [aws_security_group.main_sg.name, aws_security_group.ssh_sg.name]
+
+# Limitar o Acesso HTTP
+ - Assim como o SSH feito antes, precisamos fazer a mesma coisa com o HTTP, limitar o acesso, e iremos fazer isso deixando apenas limitado a porta 80;
+
+                      ingress {
+                       description      = "Allow HTTP from trusted IPs"
+                       from_port        = 80
+                       to_port          = 80
+                       protocol         = "tcp"
+                       cidr_blocks      = ["SEU_IP_PUBLICO/32"] # Substitua pelo seu IP público
+                     }
+
+# Usar Chaves SSH com uma Criptografia mais Forte
+ - Atualmente estamos criptografando em 2048 bits, porém, conseguimos aumentar esse valor para 4096;
+   
+       rsa_bits = 4096
 
 
-
-
+# Automação da Instalação do Nginx
+ - Após definirmos a porta 80 no HTTP, agora é possível que o Nginx seja acessado publicamente, com isso, precisamos fazer mais algumas coisas.
+   # Adição do Script 'user_data'
+      - No bloco da 'aws_instance' é necessário ser adicionado o script 'user_data' para instalar e iniciar o Nginx automaticamente após a criação da instância.
+        
+            user_data = <<-EOF
+              #!/bin/bash
+              apt-get update -y
+              apt-get install -y nginx
+              systemctl start nginx
+              systemctl enable nginx
+               EOF
+        
+- #!/bin/bash - Define o interpretador de comandos como Bash;
+- apt-get update -y - Atualiza a lista de pacotes disponíveis;
+- apt-get-install -y nginx - Instala o Nginx;
+- systemctl start nginx - Inicia o serviço do Nginx;
+- systemctl enable nginx - Configura o Nginx para iniciar automaticamente no boot
