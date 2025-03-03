@@ -130,10 +130,15 @@ Exibe a chave privada e o ip público da instância após a criação.
      - Se substituirmos a regra de entrada pela seguinte:
           `ingress {
               description      = "Allow SSH from trusted IPs"
+       
               from_port        = 22
+       
               to_port          = 22
+       
               protocol         = "tcp"
-              cidr_blocks      = ["IP Público/32"] 
+       
+              cidr_blocks      = ["IP Público/32"]
+       
             }`
 # Usar um Security Group específico para o SSH
  - Devemos criar um grupo separado para o SSH e associar o mesmo a instância;
