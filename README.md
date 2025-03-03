@@ -36,3 +36,16 @@
 - Default
   - Valor padrão da variável, caso nada seja fornecido para a mesma.
 
+## Gerando uma chave privada para SSH
+   - 'resource "tls_private_key" ' - Cria uma chave privada utilizando o provedor tls ( Transport Layer Security);
+   - O algoritmo de criptografia utilizado foi o RSA;
+   - O tamanho da chave em bits foi de 2048 bits (Tamanho seguro);
+## Criando um par de chaves na AWS
+   - 'resource "aws_key_pair" ' - Cria um par de chaves na AWS para acessar as instâncias EC2 via SSH antes já definido;
+   - 'key name' - Nome do par de chaves, aqui, ele utiliza uma interpolação que faz incluir o nome candidato e do projeto;
+   - 'public_key' - Chave pública gerada pelo 'tls_private_key'. A chave privada que será usada para ter acesso a instância;
+## Criando uma Virtual Private Cloud (VPC)
+   - 'resource "aws_vpc" ' - Cria uma VPC, é uma rede virtual isolada na AWS;
+   - 'cidr_block' - Define o intervalo de IPs da VPC. No nosso caso, como temos /16 é '2^16', logo, permite até 65.536 Ips;
+   - 'enable_dns_support' - Habilita suporte a DNS na VPC;
+   - 'tags' - Metadados para identificar o recurso. Onde o nome da VPC está incluindo o projeto e o candidato;
