@@ -63,12 +63,12 @@
    - 'resource "aws_route_table" ' - Cria uma tabela para definir como o tráfego de rede é direcionado;
    - 'vpc_id' - ID da VPC á qual tabela de rotas ele pertence;
    - 'route' - Define uma rota
-           - 'cidr_block' - Intervalo de Ips de destino, aqui, significa todo o tráfego;
-           - 'gateway_id' - ID do gateway para onde o tráfego será direcionado, aqui é o IGW;
+     - 'cidr_block' - Intervalo de Ips de destino, aqui, significa todo o tráfego;
+     - 'gateway_id' - ID do gateway para onde o tráfego será direcionado, aqui é o IGW;
    - 'tags' - Metadados para identificar a tabela de rotas;
 ## Associando a Subnet à Tabela de Rotas
    - 'resource "aws_route_table_association" ' - Associa uma subnet a uma tabela de rotas;
-         - 'subnet_id' - ID da Subnet;
-         - 'route_table_id' - Id da Tabela de Rotas;
-         - 'tags' - Metadados para identificar a associação;
+     - 'subnet_id' - ID da Subnet;
+     - 'route_table_id' - Id da Tabela de Rotas;
+     - 'tags' - Metadados para identificar a associação;
 
