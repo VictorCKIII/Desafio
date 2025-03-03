@@ -85,4 +85,30 @@
           - 'portocol' - "-1" Significa todos os protocolos;
       - 'tags' - Metadados para identificar o grupo;
 ## Obtendo a AMI do Debian 12
-  - 
+  - 'data "aws_ami" ' - Obtém uma AMI ( Amazon Machine Image) da AWS.
+     - 'most_recent' - Retorna a AMI mais recente;
+     - 'filter' - Filtros para encontrar a AMI desejada;
+        - 'name' - Filtra por nome;
+        - 'virtualization-type' - Filtra por tipo de virtualização;
+     - 'owners' - Id do proprietário da AMI;
+
+## Criando uma instância EC2
+   - 'resource "aws_instance" ' -  Cria uma instância EC2;
+      - 'ami' - Id da AMI usada para instância;
+      - 'instance_type' - Tipo da instância;
+      - 'subnet_id' - Id da Subnet onde a instância será criada;
+      - 'key_name' - Nome do par de chaves para SSH;
+      - 'security_groups' - Lista de grupos de segurança associados a instância;
+      - 'associate_public_ip_adress' - Define se a instância terá um IP público;
+      - 'root_block_device' - Configura o disco raiz da instância;
+         - 'volume_size' - Tamanho do disco em GB;
+         - 'volume_type' - Tipo de volume;
+         - 'delete_on_termination' - Define se o disco será excluído quando a instância for encerrada.
+      - 'user_data' - Script executado na inicialização da instância;
+      - 'tags' - Metadados para identificar a instância;
+## Outputs 
+  - 'output' - Define os valores que serão exibidos após a execução do Terraform;
+     - 'private_key' - Exibe a chave privada gerada para acessar a instância. O valor é marcado como sensitive para evitar exibição no log;
+     - 'ec2_public_ig' - Exibe o ip público da instância EC2;
+   
+       
