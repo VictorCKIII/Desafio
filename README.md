@@ -71,4 +71,18 @@
      - 'subnet_id' - ID da Subnet;
      - 'route_table_id' - Id da Tabela de Rotas;
      - 'tags' - Metadados para identificar a associação;
-
+## Criando um Security Group
+   - 'resource "aws_security_group" ' - Cria um grupo de segurança, que serve como um firewall virtual;
+      - 'name' - Nome do grupo de segurança;
+      - 'description' - Descrição do grupo;
+      - 'vpc_id' - ID da VPC a qual o grupo pertence;
+      - 'ingress' - Regras de entrada;
+         - 'description' - Descrição da regra;
+         - 'from_port' e 'to_port' - Intervalo de portas. Aqui, 22 para SSH;
+         - 'cidr_block' e 'ipv6_cidr_blocks' - Intervalos de Ips permitidos. Aqui permitem qualquer Ip;
+      - 'egress' - Regras de saída;
+          - 'from_port' e 'to_port' - "0" Signifca todas as portas;
+          - 'portocol' - "-1" Significa todos os protocolos;
+      - 'tags' - Metadados para identificar o grupo;
+## Obtendo a AMI do Debian 12
+  - 
