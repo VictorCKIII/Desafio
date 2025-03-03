@@ -111,4 +111,12 @@
      - 'private_key' - Exibe a chave privada gerada para acessar a instância. O valor é marcado como sensitive para evitar exibição no log;
      - 'ec2_public_ig' - Exibe o ip público da instância EC2;
    
-       
+# Resumo
+Esse código configura o provedor AWS na região us-east-1;
+Define variáveis para o nome do projeto e do candidato;
+Gera uma chave privada para SSH e registra a mesma na AWS; 
+Cria uma VPC, uma subnet, um Internet Gateway e uma tabela de rotas;
+Configura um grupo de segurança para permitir SSH e todo o tráfego de saída; 
+Obtém a AMi mais recente do Debian 12;
+Cria uma instância EC2 com um ip público, usando a AMI do Debian 12; 
+Exibe a chave privada e o ip público da instância após a criação.
