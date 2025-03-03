@@ -120,3 +120,5 @@ Configura um grupo de segurança para permitir SSH e todo o tráfego de saída;
 Obtém a AMi mais recente do Debian 12;
 Cria uma instância EC2 com um ip público, usando a AMI do Debian 12; 
 Exibe a chave privada e o ip público da instância após a criação.
+
+# Tarefa 2
