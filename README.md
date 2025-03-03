@@ -138,17 +138,17 @@ Exibe a chave privada e o ip público da instância após a criação.
 # Usar um Security Group específico para o SSH
  - Devemos criar um grupo separado para o SSH e associar o mesmo a instância;
     - resource "aws_security_group" "ssh_sg" {
-  name        = "${var.projeto}-${var.candidato}-ssh-sg"
-  description = "Permitir SSH apenas de IPs confiáveis"
-  vpc_id      = aws_vpc.main_vpc.id
-
-  ingress {
-    description      = "Allow SSH from trusted IPs"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["SEU_IP_PUBLICO/32"] # Substitua pelo seu IP público
-  }
+        name        = "${var.projeto}-${var.candidato}-ssh-sg"
+        description = "Permitir SSH apenas de IPs confiáveis"
+        vpc_id      = aws_vpc.main_vpc.id
+      
+        ingress {
+          description      = "Allow SSH from trusted IPs"
+          from_port        = 22
+          to_port          = 22
+          protocol         = "tcp"
+          cidr_blocks      = ["SEU_IP_PUBLICO/32"] # Substitua pelo seu IP público
+        }
 
   tags = {
     Name = "${var.projeto}-${var.candidato}-ssh-sg"
