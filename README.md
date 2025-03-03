@@ -49,3 +49,26 @@
    - 'cidr_block' - Define o intervalo de IPs da VPC. No nosso caso, como temos /16 é '2^16', logo, permite até 65.536 Ips;
    - 'enable_dns_support' - Habilita suporte a DNS na VPC;
    - 'tags' - Metadados para identificar o recurso. Onde o nome da VPC está incluindo o projeto e o candidato;
+## Criando uma Subnet
+   - 'resource "aws_subnet" ' - Cria uma subnet dentro da VPC;
+   - 'vpc_id' - ID da VPC à qual a subnet pertence;
+   - 'cidr_block' - Intervalo de Ips da subnet. Aqui, permite até 256 Ips;
+   - 'availability_zone' - Zona de disponibilidade onde a subnet será criada. Aqui é definido a 'us-east-1a';
+   - 'tags' - Metadados usados para identificar a subnet;
+## Criando um Internet Gateway
+   - 'resource "aws_internet_gateway" ' - Cria um Internet Gateway (IGW), que permite comunicação entre VPC e a internet;
+   - 'vpc_id' - Id da VPC à qual o IGW está associado;
+   - 'tags' - Metadados para identificar o IGW;
+## Criando uma Tabela de Rotas
+   - 'resource "aws_route_table" ' - Cria uma tabela para definir como o tráfego de rede é direcionado;
+   - 'vpc_id' - ID da VPC á qual tabela de rotas ele pertence;
+   - 'route' - Define uma rota
+           - 'cidr_block' - Intervalo de Ips de destino, aqui, significa todo o tráfego;
+           - 'gateway_id' - ID do gateway para onde o tráfego será direcionado, aqui é o IGW;
+   - 'tags' - Metadados para identificar a tabela de rotas;
+## Associando a Subnet à Tabela de Rotas
+   - 'resource "aws_route_table_association" ' - Associa uma subnet a uma tabela de rotas;
+         - 'subnet_id' - ID da Subnet;
+         - 'route_table_id' - Id da Tabela de Rotas;
+         - 'tags' - Metadados para identificar a associação;
+
